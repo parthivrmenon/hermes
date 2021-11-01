@@ -1,0 +1,24 @@
+Use Cases:
+
+1. GET  go/     => display home page and instructions on how to use.
+
+2. POST go/     => add a new short link
+                    => request format { "id":"mail", "url" : "https://gmail.com" }
+                    => response
+                        => 201, if successfully created.
+                        => 400, if short link already exists OR if request is invalid.
+                            => request invalid if id set to 'reserved words'
+                            => 'reserved words' = ["list","add","edit","delete"]
+                            => allowed chars = [a-z, A-Z, 0-9]
+                            => max id size = 6
+                            => 308,915,776 possible urls 
+                            
+
+3. GET  go/list => list all existing short links
+                    => response
+                        => 200 + json representation of existing short links
+
+
+
+4. GET  go/edit => edit an existing short link 
+5. GET  go/<id> => 302 redirect to url mapped to id.  
