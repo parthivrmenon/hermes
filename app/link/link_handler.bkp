@@ -1,0 +1,22 @@
+package link
+
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
+
+func AddLink(c *gin.Context) {
+	var newlink Model
+	err := c.BindJSON(&newlink)
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "Could not be created."})
+	}
+
+	Repository.Set()
+	// repository.Add
+	//links = append(links, newlink)
+
+	c.IndentedJSON(http.StatusCreated, newlink)
+
+}
