@@ -2,10 +2,9 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis"
 	"github.com/parthivrmenon/hermes/app"
 	"github.com/parthivrmenon/hermes/app/link"
-
-	"github.com/go-redis/redis"
 )
 
 func main() {
@@ -23,8 +22,6 @@ func main() {
 	linkHandler := link.NewHandler(repo)
 
 	router := gin.Default()
-	router.LoadHTMLGlob("app/templates/*.tmpl")
-	router.Static("/assets", "app/assets")
 	app.InitializeRoutes(router, linkHandler)
 	router.Run()
 }

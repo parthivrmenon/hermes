@@ -14,9 +14,9 @@ func InitializeRoutes(router *gin.Engine, handler *link.Handler) {
 	// router.Static("/assets", "./assets")
 	// router.LoadHTMLFiles("templates/index.html")
 
-	router.GET("/", home)
+	router.GET("/api/link/:id", handler.GetLink)
 
-	router.POST("/", handler.AddLink)
+	router.POST("/api/link", handler.SetLink)
 
 	// router.GET("/list", listLinks)
 
