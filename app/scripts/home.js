@@ -38,4 +38,3 @@ document.getElementById("hits").innerHTML = tab;
 
 
 
-

@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="scripts/home.js"></script>
 <link rel="stylesheet" href="styles/home.css">
+<script src="https://kit.fontawesome.com/770e16b37c.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -16,8 +17,16 @@
       <img src="assets/wings.png" alt="Go">
     </div>
 
+    
+
 
     <div class="centered-container">
+      <div class="table-refresh-button"> 
+        <button  onclick="getHits('http://localhost:8080/api/hits')">
+        Refresh Hits
+        </button>
+      </div>
+      
       <table  class="styled-table">
         <thead>
           <th class="styled-table-header"> Link </th>
