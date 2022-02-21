@@ -9,21 +9,16 @@ import (
 
 func InitializeRoutes(router *gin.Engine, handler *link.Handler) {
 
-	// router.LoadHTMLGlob("templates/*")
+	router.LoadHTMLGlob("app/templates/*.*")
+	router.Static("/assets", "app/assets")
+	router.Static("/scripts", "app/scripts")
+	router.Static("/styles", "app/styles")
+	router.StaticFile("/favicon.ico", "app/assets/wings.png")
 
-	// router.Static("/assets", "./assets")
-	// router.LoadHTMLFiles("templates/index.html")
-
-	router.GET("/api/link/:id", handler.GetLink)
-
+	router.GET("/", home)
+	router.GET("/api/hits", handler.GetHits)
+	router.GET("/:id", handler.GetLink)
 	router.POST("/api/link", handler.SetLink)
-
-	// router.GET("/list", listLinks)
-
-	// router.GET("/add/:id/:url", addLink)
-
-	// router.GET("/:id", getLinkById)
-
 }
 
 func home(c *gin.Context) {
@@ -32,10 +27,8 @@ func home(c *gin.Context) {
 		http.StatusOK,
 		"home.tmpl",
 		gin.H{
-			"title":      "Hermes",
-			"header":     "Hermes - a tiny links manager.",
-			"text-title": "APIs",
-			"text-body":  "<doc-here>",
+			"title":  "Hermes",
+			"header": "Hermes - a tiny links manager.",
 		},
 	)
 }

@@ -16,17 +16,18 @@ func NewHandler(r Repository) *Handler {
 }
 
 func (h *Handler) SetLink(c *gin.Context) {
-	var newLink Model
+	var newLink Link
 	err := c.BindJSON(&newLink)
 	if err != nil {
 		c.IndentedJSON(http.StatusBadRequest, gin.H{"Meesage": "Bad Request."})
 	}
 
-	err = h.repository.Set(newLink.ID, newLink.URL)
+	err = h.repository.SetLink(newLink.ID, newLink.URL)
 	if err != nil {
 		fmt.Println(err)
 		c.IndentedJSON(http.StatusBadRequest, gin.H{"Message": "Could not save to repository."})
 	} else {
+
 		c.IndentedJSON(http.StatusCreated, newLink)
 
 	}
@@ -34,8 +35,16 @@ func (h *Handler) SetLink(c *gin.Context) {
 
 func (h *Handler) GetLink(c *gin.Context) {
 	id := c.Param("id")
+	hit_id := "hits-" + id
 	fmt.Println(id)
-	url, err := h.repository.Get(id)
+	fmt.Println(hit_id)
+
+	err := h.repository.IncLinkHits(id)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	url, err := h.repository.GetLink(id)
 	if err != nil {
 		fmt.Println(err)
 		c.IndentedJSON(http.StatusBadRequest, gin.H{"Message": "Key not found!"})
@@ -43,4 +52,22 @@ func (h *Handler) GetLink(c *gin.Context) {
 		fmt.Println(url)
 		c.Redirect(301, url)
 	}
+}
+
+func (h *Handler) IncrementHit(c *gin.Context) error {
+	id := c.Param("id")
+	fmt.Println("Increment Hit for ", id)
+	err := h.repository.IncLinkHits(id)
+	return err
+
+}
+
+func (h *Handler) GetHits(c *gin.Context) {
+	hits, err := h.repository.GetHits()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		c.IndentedJSON(http.StatusOK, gin.H{"Hits": hits})
+	}
+
 }

@@ -2,38 +2,35 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {
-  box-sizing: border-box;
-}
-
-/* Create two equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-</style>
+<script src="scripts/home.js"></script>
+<link rel="stylesheet" href="styles/home.css">
 </head>
 <body>
 
-<h2>{{ .title }}</h2>
 
-<div class="row">
-  <div class="column">
-  </div>
-  <div class="column">
-    <h2> {{ .text_title }}</h2>
-    <p> {{ .text_body }} </p>
-  </div>
+
+
+
+    <div class="centered-container">
+    <div class="hero-text">Hermes</div>
+      <img src="assets/wings.png" alt="Go">
+    </div>
+
+
+    <div class="centered-container">
+      <table  class="styled-table">
+        <thead>
+          <th class="styled-table-header"> Link </th>
+          <th class="styled-table-header"> Hits </th>
+        </thead>
+        <tbody id="hits">
+        </tbody>
+      </table>
+    </div>
 </div>
+
+
+
 
 </body>
 </html>

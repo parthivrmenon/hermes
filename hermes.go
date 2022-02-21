@@ -21,5 +21,5 @@ func main() {
 
 	router := gin.Default()
 	app.InitializeRoutes(router, linkHandler)
-	router.Run()
+	router.Run(":80")
 }
